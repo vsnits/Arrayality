@@ -9,12 +9,11 @@
    Units shall be next to each other, deuces through one, three through two, and so on.
    
 # Running offline
-     
-    ```shell
-    # locate the directory
-    $ wget -r -np -nH https://vsnits.github.io/Arrayality/
-    # open Arrayality/index.html
-    ```
+```shell
+ # locate the directory
+ $ wget -r -np -nH https://vsnits.github.io/Arrayality/
+ # open Arrayality/index.html
+```
 
  # Lisence
    The Unlicense
