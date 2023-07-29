@@ -65,15 +65,15 @@
       document.getElementById("moves").innerHTML = `Moves ${moves}`  
       };
 
-  canv.style.border = "1px solid"
+ // canv.style.border = "1px solid"
   function draw(s) {
       ctx.clearRect(0,0,canv.width, canv.height)
-      for(var i = clwidth; i < canv.width; i += clwidth) {
+    /*  for(var i = clwidth; i < canv.width; i += clwidth) {
           ctx.beginPath()
           ctx.fillStyle = "black"
           ctx.fillRect(i, 0, 1, clwidth)
           ctx.closePath()
-          }
+          } */
       for(var i = 0; i < board.length; i++) {
           // switch case glitches!
           if(board[i] == "1") { dr("blue", i); }
@@ -92,40 +92,35 @@
   /* events */
   
   function X(e) {
+      console.log(e)
       return e.pageX-canv.offsetLeft
       };
 
+  /*
+    Heads up! Mouse events may affect touch simulator!
+   */
   var action = false
-  canv.onmousedown = function(e) {
+  function mdn(e) {
+      // console.error(action)
       canv.style.cursor = "grab"
       var p = Math.floor(X(e)/ clwidth)
       action = p
       };
+  canv.onmousedown = mdn
 
-  canv.onmouseup = function(e) {
-      if(action || action == 0) {
+  function mup(e) {
+      if(action || action === 0) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
           var p = Math.floor(X(e) / clwidth)
           swap(action, p)
+          action = false
           }
-      };
-
+       };
+  document.onmouseup = mup
+ 
   canv.addEventListener("touchstart", function(e) {
-      canv.onmousedown(e.touches[0])
+      (action || action === 0)? mup(e.touches[0]) : mdn(e.touches[0])
       })
-  
-  canv.addEventListener("touchend", function(e) {
-      canv.onmouseup(e.changedTouches[0])
-      })
-  
-  document.addEventListener("touchend", function() {
-      action = false
-      })
-  
-  document.onmouseup = function() {
-      canv.style.cursor = "default"
-      action = false
-      };
 
   function resize() {
       canv.style.marginLeft = (innerWidth-canv.width)/2 + "px"
