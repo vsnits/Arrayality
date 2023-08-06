@@ -16,6 +16,6 @@
     # open Arrayality/index.html
     ```
 
- # Lisence
+ # License
    The Unlicense
    
