@@ -36,6 +36,7 @@
       };
 
   function entergame() {
+      moves = 0
       board = Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
       while(score(board) > mx) {
           board =  Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
@@ -65,15 +66,8 @@
       document.getElementById("moves").innerHTML = `Moves ${moves}`  
       };
 
- // canv.style.border = "1px solid"
   function draw(s) {
       ctx.clearRect(0,0,canv.width, canv.height)
-    /*  for(var i = clwidth; i < canv.width; i += clwidth) {
-          ctx.beginPath()
-          ctx.fillStyle = "black"
-          ctx.fillRect(i, 0, 1, clwidth)
-          ctx.closePath()
-          } */
       for(var i = 0; i < board.length; i++) {
           // switch case glitches!
           if(board[i] == "1") { dr("blue", i); }
