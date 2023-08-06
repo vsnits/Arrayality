@@ -92,42 +92,50 @@
   /* events */
   
   function X(e) {
-      console.log(e)
+      // console.log(e)
       return e.pageX-canv.offsetLeft
       };
 
   /*
-    Heads up! Mouse events may affect touch simulator!
+    Watch out! Mouse events may affect touch simulator!
    */
   var action = false
-  function mdn(e) {
+  var type = null
+  function mdn(e, tp) {
+      if(!type) {
       // console.error(action)
+      type = tp
       canv.style.cursor = "grab"
       var p = Math.floor(X(e)/ clwidth)
       action = p
+         }
       };
-  canv.onmousedown = mdn
+  canv.onmousedown = function(e) { mdn(e, "mouse") }
 
-  function mup(e) {
-      if(action || action === 0) { // keep in mind (0 == false) returns (true)
+  function mup(e, tp) {
+      if(( action || action === 0) && tp == type) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
           var p = Math.floor(X(e) / clwidth)
           swap(action, p)
           action = false
+          type = null
           }
        };
-  document.onmouseup = mup
+  document.onmouseup = function(e) { mup(e, "mouse") }
  
   canv.addEventListener("touchstart", function(e) {
-      (action || action === 0)? mup(e.touches[0]) : mdn(e.touches[0])
+      (action || action === 0)? mup(e.touches[0], "touch") : mdn(e.touches[0], "touch")
       })
 
   function resize() {
       canv.style.marginLeft = (innerWidth-canv.width)/2 + "px"
-      canv.style.marginTop = (innerHeight-canv.height)/2 - 2*clwidth + "px"   
+      canv.style.marginTop = (innerHeight-canv.height)/2 - 110 + "px"
       };
 
   window.onresize = function() { resize() };
 
-  window.onload = function() {   entergame(); resize() };
+  window.onload = function() {  
+      canv.style.borderBottom = "2px dashed firebrick"
+      entergame(); resize()
+   };
 

@@ -1,11 +1,17 @@
 <html>
     <head>
       <title> Arrayality </title>
-      <link rel="icon" href="icon.png" />  
+      <link rel="icon" href="icon.png" />
+      <link re="preload" href="arrayality.js" />
       <style>
        body {
          touch-action: manipulation;
-       }
+       } 
+     * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
       .about {
          font-size: 30px;
          text-align: center;
@@ -19,13 +25,16 @@
          margin-top: 20px;
          color: brown;
        }
-      #reset {
+      .reset {
            cursor: pointer;
            text-align: left;
-           padding: 15px; 
+           padding: 0;
+           padding-top: 10px;
            color: #50883b;
            font-size: 110%;
            width: min-content;
+           margin: 0;
+           margin-left: 20px;
        }
       canvas {
          border-bottom: 2px dashed firebrick;
@@ -34,7 +43,8 @@
         </style>
     </head>
     <body style="margin: 0">
-          <p id="reset" onclick="playback()">playback</p>
+          <p class="reset" onclick="playback()">@playback</p>
+          <p class="reset" onclick="entergame()">!new</p>
           <canvas id="canv"></canvas>
           <p id="score" class="about"></p>
           <p id="moves" class="about"></p>
