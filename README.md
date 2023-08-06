@@ -10,11 +10,11 @@
    
 # Running offline
      
-    ```shell
-    # locate the directory
-    $ wget -r -np -nH https://vsnits.github.io/Arrayality/
-    # open Arrayality/index.html
-    ```
+```shell
+ # locate the directory
+ $ wget -r -np -nH https://vsnits.github.io/Arrayality/
+ # open Arrayality/index.html
+```
 
  # License
    The Unlicense
