@@ -1,5 +1,5 @@
 
-  let board, origin, mx = 4, width = 16, moves = 0
+  let board = [], origin, mx = 4, width = 16, moves = 0
   let clwidth = Math.ceil(innerWidth*0.8 / (width))
   
   /* core */
@@ -36,7 +36,7 @@
       };
 
   function entergame() {
-      moves = 0
+      moves = 0;
       board = Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
       while(score(board) > mx) {
           board =  Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
@@ -86,7 +86,6 @@
   /* events */
   
   function X(e) {
-      // console.log(e)
       return e.pageX-canv.offsetLeft
       };
 
@@ -95,30 +94,38 @@
    */
   var action = false
   var type = null
+   
+  function maketype(tp) {
+     if(!type) {
+        type = tp
+        };
+      return type
+   };
+   
   function mdn(e, tp) {
-      if(!type) {
-      // console.error(action)
-      type = tp
+      if( maketype(tp) == tp ) {
       canv.style.cursor = "grab"
       var p = Math.floor(X(e)/ clwidth)
       action = p
+      canv.style.borderBottom = "2px solid firebrick"
          }
       };
-  canv.onmousedown = function(e) { mdn(e, "mouse") }
+  document.addEventListener("mousedown", function(e) { mdn(e, "mouse") })
 
   function mup(e, tp) {
-      if(( action || action === 0) && tp == type) { // keep in mind (0 == false) returns (true)
+      if(( action || action === 0) && maketype(tp) == tp) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
+          canv.style.borderBottom = "2px dashed firebrick"
           var p = Math.floor(X(e) / clwidth)
           swap(action, p)
           action = false
-          type = null
+          // type=null // score glitch?
           }
        };
-  document.onmouseup = function(e) { mup(e, "mouse") }
+  document.addEventListener("mouseup", function(e) { mup(e, "mouse") })
  
   canv.addEventListener("touchstart", function(e) {
-      (action || action === 0)? mup(e.touches[0], "touch") : mdn(e.touches[0], "touch")
+      if(action || action === 0) { mup(e.touches[0], "touch") } else { mdn(e.touches[0], "touch") }
       })
 
   function resize() {
@@ -130,6 +137,6 @@
 
   window.onload = function() {  
       canv.style.borderBottom = "2px dashed firebrick"
-      entergame(); resize()
+      makeboard(); resize(); entergame(); // load optimization: `entergame()` takes a lot time
    };
 
