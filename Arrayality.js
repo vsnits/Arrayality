@@ -69,7 +69,7 @@
   function draw(s) {
       ctx.clearRect(0,0,canv.width, canv.height)
       for(var i = 0; i < board.length; i++) {
-          // switch case glitches!
+          // switch case glitches! (because of string type)
           if(board[i] == "1") { dr("blue", i); }
           if(board[i] == "2") { dr("orange", i); }   
           if(board[i] == "3") { dr("green", i); }
@@ -91,27 +91,30 @@
 
   /*
     Watch out! Mouse events may affect touch simulator!
-   */
+    Keep turned on `e.preventDefault()`
+    */
+   
   var action = false
   var type = null
-   
+  
   function maketype(tp) {
-     if(!type) {
-        type = tp
-        };
+      if(!type) {
+          type = tp;
+          };
       return type
-   };
-   
-  function mdn(e, tp) {
-      if( maketype(tp) == tp ) {
-      canv.style.cursor = "grab"
-      var p = Math.floor(X(e)/ clwidth)
-      action = p
-      canv.style.borderBottom = "2px solid firebrick"
-         }
       };
-  document.addEventListener("mousedown", function(e) { mdn(e, "mouse") })
 
+  function mdn(e, tp) {
+      if( maketype(tp) == tp) {
+          canv.style.cursor = "grab"
+          var p = Math.floor(X(e)/ clwidth)
+          action = p
+          canv.style.borderBottom = "2px solid firebrick"
+          }
+      };
+
+  canv.addEventListener("mousedown", function(e) { e.preventDefault(); mdn(e, "mouse"); return false })
+  
   function mup(e, tp) {
       if(( action || action === 0) && maketype(tp) == tp) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
@@ -119,15 +122,18 @@
           var p = Math.floor(X(e) / clwidth)
           swap(action, p)
           action = false
-          // type=null // score glitch?
+          type=null
           }
-       };
-  document.addEventListener("mouseup", function(e) { mup(e, "mouse") })
- 
-  canv.addEventListener("touchstart", function(e) {
-      if(action || action === 0) { mup(e.touches[0], "touch") } else { mdn(e.touches[0], "touch") }
-      })
+      };
 
+  document.addEventListener("mouseup", function(e) { e.preventDefault(); mup(e, "mouse"); return false })
+  
+  canv.addEventListener("touchstart", function(e) {
+      e.preventDefault() // important for testing, good for gameplay
+      if(action || action === 0) { mup(e.touches[0], "touch") } else { mdn(e.touches[0], "touch") }
+      return false // makes less noise events on some engines
+      })
+  
   function resize() {
       canv.style.marginLeft = (innerWidth-canv.width)/2 + "px"
       canv.style.marginTop = (innerHeight-canv.height)/2 - 110 + "px"
@@ -138,5 +144,5 @@
   window.onload = function() {  
       canv.style.borderBottom = "2px dashed firebrick"
       makeboard(); resize(); entergame(); // load optimization: `entergame()` takes a lot time
-   };
+      };
 
