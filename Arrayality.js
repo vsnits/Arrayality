@@ -91,38 +91,26 @@
 
   /*
     Watch out! Mouse events may affect touch simulator!
-    Keep turned on `e.preventDefault()`
+    Keep using `e.preventDefault()`
     */
-   
-  var action = false
-  var type = null
   
-  function maketype(tp) {
-      if(!type) {
-          type = tp;
-          };
-      return type
-      };
-
+  var action = false
   function mdn(e, tp) {
-      if( maketype(tp) == tp) {
-          canv.style.cursor = "grab"
-          var p = Math.floor(X(e)/ clwidth)
-          action = p
-          canv.style.borderBottom = "2px solid firebrick"
-          }
+      canv.style.cursor = "grab"
+      var p = Math.floor(X(e)/ clwidth)
+      action = p
+      canv.style.borderBottom = "2px solid firebrick"
       };
 
   canv.addEventListener("mousedown", function(e) { e.preventDefault(); mdn(e, "mouse"); return false })
   
   function mup(e, tp) {
-      if(( action || action === 0) && maketype(tp) == tp) { // keep in mind (0 == false) returns (true)
+      if( action || action === 0 ) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
           canv.style.borderBottom = "2px dashed firebrick"
           var p = Math.floor(X(e) / clwidth)
           swap(action, p)
           action = false
-          type=null
           }
       };
 
