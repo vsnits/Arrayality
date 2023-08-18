@@ -1,7 +1,7 @@
 
 
 # Arrayality intro
-    A logical game JavaScript powered & light-weight
+    A logical game JavaScript (open source) powered & light-weight
 
 # Gameplay
  Swap the numbers in the array to get the highest score in the fewest moves. <br>
