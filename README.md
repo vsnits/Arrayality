@@ -6,7 +6,7 @@
 # Gameplay
  Swap the numbers in the array to get the highest score in the fewest moves. <br>
  The score is calculated by multiplying a series of the same numbers. <br>
- Units shall be next to each other, deuces through one, three through two, and so on.
+ Units shall be next to each other, deuces through one, three through two, and so on.
 
 # Scores
   Arrays generated randomly (with a low starting score), so the maximum score is a kind of question. <br>
