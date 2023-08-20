@@ -125,6 +125,6 @@
   window.onresize = function() { resize() };
 
   window.onload = function() {  
-      makeboard(); entergame();
+      makeboard(); entergame(); resize()
       };
 
