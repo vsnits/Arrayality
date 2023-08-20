@@ -4,7 +4,7 @@
     A logical game JavaScript (open source) powered & light-weight
 
 # Gameplay
- Swap the numbers in the array to get the highest score in the fewest moves. <br>
+ Compose the numbers in the array to get the highest score in the fewest moves. <br>
  The score is calculated by multiplying a series of the same numbers. <br>
  Units shall be next to each other, deuces through one, three through two, and so on.
 
