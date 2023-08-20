@@ -1,0 +1,40 @@
+
+  body {
+      touch-action: manipulation;
+      background-color: black;
+      }
+
+  * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      }
+
+  .about {
+      font-size: 30px;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 0;
+      }
+
+  #moves {
+      color: #2b827a;
+      }
+
+  #score {
+      margin-top: 20px;
+      color: bisque;
+      }
+
+  .reset {
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      padding-top: 10px;
+      color: #b1d845;
+      font-size: 110%;
+      width: min-content;
+      margin: 0;
+      margin-left: 20px;
+      }
+

@@ -1,6 +1,4 @@
 
-  let board = [], origin, mx = 4, width = 16, moves = 0
-  let clwidth = Math.ceil(innerWidth*0.8 / (width))
   
   /* core */
   function score(b) {
@@ -35,12 +33,13 @@
       makeboard()
       };
 
-  function entergame() {
+  function entergame() { // slow
       moves = 0;
-      board = Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
-      while(score(board) > mx) {
-          board =  Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
-          }
+      do {
+          board = Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
+          } 
+      while(score(board) > mx);
+      
       origin = Array.from(board)
       makeboard()
       };
@@ -52,11 +51,6 @@
       };
 
   /* graphics */
-  var canv = document.getElementById("canv")
-  canv.height = clwidth
-  canv.width = width*clwidth
-  var ctx = canv.getContext("2d")
-  ctx.font = `${clwidth*0.8}px serif`
   
   function makeboard() {
       clear()
@@ -70,11 +64,10 @@
       ctx.clearRect(0,0,canv.width, canv.height)
       for(var i = 0; i < board.length; i++) {
           // switch case glitches! (because of string type)
-          if(board[i] == "1") { dr("blue", i); }
-          if(board[i] == "2") { dr("orange", i); }   
-          if(board[i] == "3") { dr("green", i); }
-          if(board[i] == "4") { dr("red", i); } 
-          if(board[i] == "5") { dr("purple", i); }  
+          if(board[i] == "1") { dr("white", i); }
+          if(board[i] == "2") { dr("chocolate", i); }   
+          if(board[i] == "3") { dr("khaki", i); }
+          if(board[i] == "4") { dr("yellow", i); }   
           }
       };
 
@@ -92,6 +85,7 @@
   /*
     Watch out! Mouse events may affect touch simulator!
     Keep using `e.preventDefault()`
+    Mobile devices also combine touch with mouse!
     */
   
   var action = false
@@ -99,7 +93,7 @@
       canv.style.cursor = "grab"
       var p = Math.floor(X(e)/ clwidth)
       action = p
-      canv.style.borderBottom = "2px solid firebrick"
+      canv.style.borderBottom = "2px solid #2b827a"
       };
 
   canv.addEventListener("mousedown", function(e) { e.preventDefault(); mdn(e, "mouse"); return false })
@@ -107,10 +101,11 @@
   function mup(e, tp) {
       if( action || action === 0 ) { // keep in mind (0 == false) returns (true)
           canv.style.cursor = "default"
-          canv.style.borderBottom = "2px dashed firebrick"
+          canv.style.borderBottom = ""
           var p = Math.floor(X(e) / clwidth)
-          swap(action, p)
-          action = false
+          if(p != action) {
+              swap(action, p)
+              }; action = false
           }
       };
 
@@ -119,7 +114,7 @@
   canv.addEventListener("touchstart", function(e) {
       e.preventDefault() // important for testing, good for gameplay
       if(action || action === 0) { mup(e.touches[0], "touch") } else { mdn(e.touches[0], "touch") }
-      return false // makes less noise events on some engines
+      return false // reduces noise events on some engines
       })
   
   function resize() {
@@ -130,7 +125,6 @@
   window.onresize = function() { resize() };
 
   window.onload = function() {  
-      canv.style.borderBottom = "2px dashed firebrick"
-      makeboard(); resize(); entergame(); // load optimization: `entergame()` takes a lot time
+      makeboard(); entergame();
       };
 
