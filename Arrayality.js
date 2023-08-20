@@ -65,9 +65,9 @@
       for(var i = 0; i < board.length; i++) {
           // switch case glitches! (because of string type)
           if(board[i] == "1") { dr("white", i); }
-          if(board[i] == "2") { dr("chocolate", i); }   
+          if(board[i] == "2") { dr("violet", i); }   
           if(board[i] == "3") { dr("khaki", i); }
-          if(board[i] == "4") { dr("yellow", i); }   
+          if(board[i] == "4") { dr("red", i); }   
           }
       };
 
