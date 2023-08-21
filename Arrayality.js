@@ -1,21 +1,21 @@
 
   
   /* core */
-  function score(b) {
+  function score(b) { // count composition
       var s = 1
       for(var i = 1; i <= mx; i++) {
           for(var p = 0; p < b.length; p++) {
               var c = 0
               for(var e = p; e < b.length; e = e + i) {
                   if(b[e] == i.toString() && !b[e].mark && b[e].mark != i) {
-                      b[e].mark = i
-                      c++
+                      b[e].mark = i // marked numbers are in some sequence
+                      c++ // count the sequence length
                       } else { break }
                   }
-              c? (s *= c) : 0
+              c? (s *= c) : 0 // compose if something is to
               }
           }
-      return s
+      return s // return current score
       };
 
   function clear() {
@@ -28,12 +28,12 @@
       moves++
       var i1 = board[p1]
       var i2 = board[p2]
-      board.splice(p1, 1, i2)
+      board.splice(p1, 1, i2) // replace the positions of board
       board.splice(p2, 1, i1)
       makeboard()
       };
 
-  function pairs(brd) { // check every item have at least another similar one
+  function pairs(brd) { // check every item has at least similar one
       let paired = []
       for(var x = 0; x < brd.length; x++) {
           let e = JSON.parse(brd[x]) // fix problem with types (new String(1) == new String(1)) is false
@@ -46,14 +46,14 @@
           };
       };
 
-  function entergame() { // slow
+  function entergame() { // slow random board generator
       moves = 0;
-      do {
+      do { // finally needed
           board = Array.from({ length: width }, () => new String(Math.floor(Math.random() * mx)+1))
           } 
       while(score(board) > mx || !pairs(board));
       
-      origin = Array.from(board)
+      origin = Array.from(board) // Avoid legacy
       makeboard()
       drop()
       };
@@ -65,10 +65,9 @@
       drop()
       };
 
-  /* graphics */
-  
+  /* graphics */  
   function makeboard() {
-      clear()
+      clear() // marks should be updated
       var sc = score(board)
       draw(board)
       document.getElementById("score").innerHTML = `Score ${sc}`
@@ -79,14 +78,14 @@
       ctx.clearRect(0,0,canv.width, canv.height)
       for(let i = 0; i < board.length; i++) {
           var r = board[i]
-          if(r==1) { dr("white", i) } // 1 == "1" still works
+          if(r==1) { dr("white", i) } // lol (1 == "1") still works
           if(r==2) { dr("violet", i) }
           if(r==3) { dr("khaki", i) }
           if(r==4) { dr("red", i) }
           }
       };
 
-  function dr(color, i) { 
+  function dr(color, i) { // separation is good for testing
       ctx.fillStyle = color
       ctx.fillText(board[i].toString(), (i+0.3)*clwidth, clwidth*0.8)
       };
@@ -98,8 +97,7 @@
       };
 
   /*
-    Watch out! Mouse events may affect touch simulator!
-    Keep using `e.preventDefault()`
+    Important to use `e.preventDefault()`, because Mouse event affect touch simulator!
     Mobile devices also combine touch with mouse!
     */
   
@@ -137,15 +135,11 @@
       if(!mup(e.touches[0], "touch")) { mdn(e.touches[0], "touch") };
       return false // reduces noise events on some engines
       })
-  
-  function resize() {
-      canv.style.marginLeft = (innerWidth-canv.width)/2 + "px"
-      canv.style.marginTop = (innerHeight-canv.height)/2 - 110 + "px"
-      };
 
   window.onresize = function() { resize() };
 
   window.onload = function() {  
       makeboard(); entergame(); resize()
       };
+ // How small peace of code meets all JavaScript problems? I don't really kow ;)
 
