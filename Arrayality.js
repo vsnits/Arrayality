@@ -124,7 +124,7 @@
 
   function drop() {
       canv.style.cursor = "default"
-      canv.style.borderBottom = ""
+      canv.style.borderBottom = "" // border is already set by css
       action = false
       };
 
