@@ -1,4 +1,3 @@
-
   
   /* core */
   function score(b) { // count composition
@@ -86,7 +85,10 @@
       };
 
   function dr(color, i) { // separation is good for testing
-      ctx.fillStyle = color
+      ctx.fillStyle = color;
+      if((action || action ===0) && board[i].mark == JSON.parse(board[action])) { 
+          ctx.fillStyle = "rgba(255,255,255, 0.1)"; ctx.fillRect(i*clwidth, 0, clwidth, clwidth)
+       }
       ctx.fillText(board[i].toString(), (i+0.3)*clwidth, clwidth*0.8)
       };
 
@@ -114,8 +116,8 @@
   function mup(e, tp) {
       if( action || action === 0 ) { // keep in mind (0 == false) returns (true)
           var p = Math.floor(X(e) / clwidth)
-          if(p != action) {
-              swap(action, p)
+          if(p != action) { 
+              var u = action; action = p; swap(p, u)
               }; 
           drop()
           return true // need for touch events
