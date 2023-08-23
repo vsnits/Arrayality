@@ -20,12 +20,16 @@
           <p id="moves" class="about"></p>
           <script type="text/javascript">
           // quick setup
-          let board = [], origin, mx = 4, width = 16, moves = 0
-          let clwidth = Math.ceil(innerWidth*0.8 / (width))
+          let board = [], origin, moves = 0, mx = 4, width, clwidth
           let canv = document.getElementById("canv"), ctx = canv.getContext("2d")
-          canv.height = clwidth
-          canv.width = width*clwidth
-          ctx.font = `${clwidth*0.8}px serif`
+          function tune(wdt, loaded) {
+             width = wdt;
+             clwidth = Math.ceil(innerWidth*0.8 / (width))
+             canv.height = clwidth
+             canv.width = width*clwidth
+             ctx.font = `${clwidth*0.8}px serif`
+             if(loaded) { resize(); entergame(); }
+          }; tune(16)
    
           function resize() {
               var el = document.getElementsByClassName("reset")[1], adtop = el.offsetTop + el.offsetHeight
