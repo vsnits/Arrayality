@@ -142,11 +142,6 @@
      console.log(e)
      if(e.key == "@") { playback() }
      if(e.key == "#") { entergame() }
-     //if(e.key == " ") { console.log(e.key) }
-    })
-
-  document.addEventListener("keyup", function(e) {
-     if(e.shiftKe) { console.log(e.key) }
     })
 
   window.onresize = function() { resize() };
