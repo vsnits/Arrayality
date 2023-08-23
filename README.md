@@ -10,7 +10,7 @@
 
 # Scores
   Arrays generated randomly (with a low starting score), so the maximum score is a kind of question. <br>
-  A typical result score is `192` while `216` and `256` is usually possible. <br>
+  A typical score (for 16x board) is `192` while `216` and `256` is usually possible. <br>
   The score `288` perfect for the most sets, rarely `340` also possible. <br>
   The theoretical maximum score has no proof at this time.
    
