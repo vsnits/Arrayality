@@ -29,7 +29,6 @@
       var i2 = board[p2]
       board.splice(p1, 1, i2) // replace the positions of board
       board.splice(p2, 1, i1)
-      makeboard()
       };
 
   function pairs(brd) { // check every item has at least similar one
@@ -117,8 +116,9 @@
       if( action || action === 0 ) { // keep in mind (0 == false) returns (true)
           var p = Math.floor(X(e) / clwidth)
           if(p != action) { 
-              var u = action; action = p; swap(p, u)
-              }; 
+              var u = action; action = p; swap(p, u);
+              };
+          makeboard()
           drop()
           return true // need for touch events
           }; 
@@ -137,6 +137,17 @@
       if(!mup(e.touches[0], "touch")) { mdn(e.touches[0], "touch") };
       return false // reduces noise events on some engines
       })
+
+  document.addEventListener("keydown", function(e) {
+     console.log(e)
+     if(e.key == "@") { playback() }
+     if(e.key == "#") { entergame() }
+     //if(e.key == " ") { console.log(e.key) }
+    })
+
+  document.addEventListener("keyup", function(e) {
+     if(e.shiftKe) { console.log(e.key) }
+    })
 
   window.onresize = function() { resize() };
 
