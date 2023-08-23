@@ -139,7 +139,6 @@
       })
 
   document.addEventListener("keydown", function(e) {
-     console.log(e)
      if(e.key == "@") { playback() }
      if(e.key == "#") { entergame() }
     })
