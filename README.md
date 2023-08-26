@@ -15,10 +15,9 @@
   The theoretical maximum score has no proof at this time.
    
 # Running offline
-     
  ```shell
   # locate the directory
-  $ wget -r -np -nH https://vsnits.github.io/Arrayality/
+  $ $ git clone https://github.com/vsnits/Arrayality/ [destination]
   # open Arrayality/index.html
  ```
 
