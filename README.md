@@ -17,7 +17,7 @@
 # Running offline
  ```shell
   # locate the directory
-  $ $ git clone https://github.com/vsnits/Arrayality/ [destination]
+  $ git clone https://github.com/vsnits/Arrayality/ [destination]
   # open Arrayality/index.html
  ```
 
