@@ -63,6 +63,14 @@
       drop()
       };
 
+  function insert(set) {
+     moves = 0
+     tune(set.length)
+     board = Array.from(set)
+     origin = Array.from(set)
+     makeboard()
+     };
+
   /* graphics */  
   function makeboard() {
       clear() // marks should be updated
