@@ -73,7 +73,7 @@
 
   /* graphics */  
   function makeboard() {
-      clear(board) // marks should be updated
+      clear() // marks should be updated
       var sc = score(board)
       draw(board)
       document.getElementById("score").innerHTML = `Score ${sc}`
