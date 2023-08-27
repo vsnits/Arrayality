@@ -63,15 +63,16 @@
       drop()
       };
 
-  function insert(set) {
+  function insert(set) { // custom sets
      moves = 0
      tune(set.length)
-     board = Array.from(set)
+     board = new Array()
+     set.forEach(function(e) { board.push(new String(e)) })
      origin = Array.from(set)
      makeboard()
      };
 
-  /* graphics */  
+  /* graphics */
   function makeboard() {
       clear() // marks should be updated
       var sc = score(board)
