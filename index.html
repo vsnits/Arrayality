@@ -5,7 +5,7 @@
       <link rel="stylesheet" href="general.css" />
       <style>
       canvas {
-         /* because importance of this style */
+         /* because of visual importance it's placed here */
          padding-bottom: 9px;
          border-bottom: 2px dashed  #cacaca;
        }
@@ -20,7 +20,7 @@
           <p id="moves" class="about"></p>
           <script type="text/javascript">
           // quick setup
-          let board = [], origin, moves = 0, mx = 4, width, clwidth
+          let board, origin, width, clwidth, moves = 0, mx = 4
           let canv = document.getElementById("canv"), ctx = canv.getContext("2d")
           function tune(wdt, loaded) {
              width = wdt;
