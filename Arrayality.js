@@ -81,14 +81,28 @@
       document.getElementById("moves").innerHTML = `Moves ${moves}`  
       };
 
+  // number colors are now random
+  
+  let colors = ["white", "violet", "khaki", "red"]
+  let rand = () => { 
+      return colors.splice((Math.random()*colors.length)|0, 1)[0]
+      };
+
+  var i1 = rand()
+  var i2 = rand()
+  var i3 = rand()
+  var i4 = rand()
+  
+  
   function draw(brd) {
+      
       ctx.clearRect(0,0,canv.width, canv.height)
       for(let i = 0; i < board.length; i++) {
           var r = board[i]
-          if(r==1) { dr("white", i) } // lol (1 == "1") still works
-          if(r==2) { dr("violet", i) }
-          if(r==3) { dr("khaki", i) }
-          if(r==4) { dr("red", i) }
+          if(r==1) { dr(i1, i) } // lol (1 == "1") still works
+          if(r==2) { dr(i2, i) }
+          if(r==3) { dr(i3, i) }
+          if(r==4) { dr(i4, i) }
           }
       };
 
