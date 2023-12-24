@@ -24,10 +24,11 @@
           let canv = document.getElementById("canv"), ctx = canv.getContext("2d")
           function tune(wdt, loaded) {
              width = wdt;
-             clwidth = Math.ceil(innerWidth*0.8 / (width))
+             let k = 0.9;
+             clwidth = Math.ceil(innerWidth*k / (width))
              canv.height = clwidth
              canv.width = width*clwidth
-             ctx.font = `${clwidth*0.8}px serif`
+             ctx.font = `${clwidth*k}px serif`
              if(loaded) { resize(); entergame(); }
           }; tune(16)
    
