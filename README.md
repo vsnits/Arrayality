@@ -1,4 +1,10 @@
 
+# !
+# Not active brunch
+# For recent changes refer
+# github.com/vsnits
+# 
+# 
 
 # Arrayality intro
     A logical game JavaScript (open source) powered & light-weight
